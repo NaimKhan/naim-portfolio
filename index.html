@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD Naim Khan | DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0f1e;
+    --bg2: #0f1629;
+    --bg3: #141c35;
+    --card: #111827;
+    --border: rgba(99,179,237,0.15);
+    --border2: rgba(99,179,237,0.3);
+    --accent: #63b3ed;
+    --accent2: #4299e1;
+    --accent3: #90cdf4;
+    --green: #68d391;
+    --amber: #f6ad55;
+    --text: #e2e8f0;
+    --muted: #718096;
+    --subtle: #a0aec0;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--subtle);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(66,153,225,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .name-highlight {
+    color: var(--accent);
+  }
+
+  .hero-role {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .hero-role span {
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 0.9em;
+  }
+
+  .hero-summary {
+    font-size: 1rem;
+    color: var(--subtle);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    display: flex; flex-direction: column;
+  }
+
+  .stat-num {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--mono);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px;
+    background: var(--accent2);
+    color: #fff;
+    border: none; border-radius: 6px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--border2); border-radius: 6px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-secondary:hover { background: rgba(99,179,237,0.08); transform: translateY(-1px); }
+
+  /* TERMINAL BLOCK */
+  .terminal {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 4rem;
+    max-width: 700px;
+  }
+
+  .terminal-bar {
+    background: var(--bg3);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #28c840; }
+
+  .terminal-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+
+  .terminal-body {
+    padding: 20px 24px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .t-prompt { color: var(--green); }
+  .t-cmd { color: var(--text); }
+  .t-comment { color: var(--muted); }
+  .t-value { color: var(--accent); }
+  .t-string { color: var(--amber); }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 2.5rem; }
+
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.75rem 2rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .exp-card:hover { border-color: var(--border2); }
+
+  .exp-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; border-radius: 0 0 0 10px;
+    background: var(--accent2);
+    border-radius: 3px 0 0 3px;
+  }
+
+  .exp-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .exp-role {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-top: 3px;
+  }
+
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg3);
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 6px;
+    margin-top: 1rem;
+  }
+
+  .exp-bullets li {
+    font-size: 14px;
+    color: var(--subtle);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 11px;
+    top: 3px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.5rem;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+
+  .skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+
+  .skill-cat {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--subtle);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* CERTS */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .cert-card:hover { border-color: var(--accent); }
+
+  .cert-badge {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin: 0 auto 1rem;
+  }
+
+  .cert-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .cert-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ACHIEVEMENTS */
+  .achieve-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .achieve-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex; gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .achieve-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(99,179,237,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  .achieve-text {
+    font-size: 14px;
+    color: var(--subtle);
+    line-height: 1.6;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .contact-link {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 12px;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+
+  .contact-link:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: rgba(99,179,237,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .contact-info .cl-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  .contact-info .cl-val {
+    font-size: 13px;
+    color: var(--accent);
+    font-family: var(--mono);
+    word-break: break-all;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    nav .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    .exp-header { flex-direction: column; }
+    section { padding: 4rem 1.25rem; }
+  }
+
+  /* CURSOR BLINK */
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  .cursor { animation: blink 1s infinite; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">naim@devops:~$</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Available for opportunities</div>
+    <h1>MD <span class="name-highlight">Naim</span> Khan</h1>
+    <p class="hero-role">DevOps Engineer &nbsp;<span>// 7+ years</span></p>
+    <p class="hero-summary">
+      Managing 200+ hybrid servers across AWS and on-premises infrastructure for 600K+ users with 99.8% uptime. Specialized in Linux administration, infrastructure automation, CI/CD pipelines, and cloud operations.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">7+</span>
+        <span class="stat-label">Years experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Servers managed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">99.8%</span>
+        <span class="stat-label">Uptime maintained</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">30%+</span>
+        <span class="stat-label">Cloud cost saved</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-secondary">View experience</a>
+    </div>
+
+    <div class="terminal" style="margin-top: 3.5rem;">
+      <div class="terminal-bar">
+        <div class="dot dot-red"></div>
+        <div class="dot dot-yellow"></div>
+        <div class="dot dot-green"></div>
+        <span class="terminal-title">naim — bash</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">naim@devops</span><span class="t-comment">:</span><span class="t-value">~</span><span class="t-comment">$</span> <span class="t-cmd">cat profile.json</span></div>
+        <div style="margin-top: 4px; color: #718096;">{</div>
+        <div>&nbsp;&nbsp;<span class="t-string">"location"</span>: <span class="t-value">"Dhaka, Bangladesh"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-string">"role"</span>: <span class="t-value">"DevOps Engineer"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-string">"certifications"</span>: [<span class="t-value">"RHCSA"</span>, <span class="t-value">"AWS SAA-C03"</span>, <span class="t-value">"VMware ICM"</span>, <span class="t-value">"CCNA"</span>],</div>
+        <div>&nbsp;&nbsp;<span class="t-string">"stack"</span>: [<span class="t-value">"Linux"</span>, <span class="t-value">"AWS"</span>, <span class="t-value">"Terraform"</span>, <span class="t-value">"Docker"</span>, <span class="t-value">"CI/CD"</span>],</div>
+        <div>&nbsp;&nbsp;<span class="t-string">"open_to_work"</span>: <span class="t-value" style="color: var(--green);">true</span></div>
+        <div style="color: #718096;">}</div>
+        <div style="margin-top: 8px;"><span class="t-prompt">naim@devops</span><span class="t-comment">:</span><span class="t-value">~</span><span class="t-comment">$</span> <span class="cursor">▌</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY ACHIEVEMENTS -->
+<section id="achievements" style="padding-top: 2rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Key achievements</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="achieve-grid">
+      <div class="achieve-card">
+        <div class="achieve-icon">🖥️</div>
+        <div class="achieve-text">Managed 200+ Linux servers across cloud and on-prem for banking, government, and US-based Fintech clients.</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">💰</div>
+        <div class="achieve-text">Reduced cloud costs by 30%+ through FinOps practices, auto-scaling, and resource optimization strategies.</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">⚡</div>
+        <div class="achieve-text">Implemented CI/CD pipelines using GitLab CI and GitHub Actions, cutting deployment time by 80%.</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">🐳</div>
+        <div class="achieve-text">Deployed 50+ containerized applications (Node.js, Next.js, PHP, Java) with 3-tier production architectures.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">DevOps Engineer</div>
+            <div class="exp-company">SMC Labs BD Ltd. — US-based Fintech & AI Company</div>
+          </div>
+          <span class="exp-period">May 2026 – Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Owned full cloud infrastructure across 8 AWS accounts covering Dev, UAT, Staging, Prod, and Security environments.</li>
+          <li>Designed CI/CD pipelines (GitLab CI) with auto-deploy to Dev/Staging and manual Prod approval using ECR images.</li>
+          <li>Deployed and managed 20+ containerized production apps (Next.js, Node.js) across 3-tier architectures on ECS/EKS.</li>
+          <li>Provisioned infrastructure as code using Terraform and Ansible for reproducible, version-controlled deployments.</li>
+          <li>Optimized AWS costs by 30%+ via FinOps practices, lifecycle policies, and S3/AWS Backup strategies.</li>
+          <li>Implemented cloud security using IAM policies, KMS encryption, Security Groups, and WAF rules.</li>
+          <li>Monitored system health using CloudWatch, Prometheus, and Grafana with proactive alerting.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">System Administrator</div>
+            <div class="exp-company">ONODA Inc. — Japanese MNC, Smart Utility Solutions</div>
+          </div>
+          <span class="exp-period">Jul 2024 – May 2026</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed 50+ hybrid Linux servers (AWS/VMware) supporting 600K+ users with full infrastructure ownership.</li>
+          <li>Administered VMware vSphere (3 ESXi hosts + vCenter) for 50+ VMs with provisioning and live migration.</li>
+          <li>Deployed ELK stack for centralized log collection, parsing, and custom Kibana dashboards.</li>
+          <li>Maintained CI/CD pipelines (GitHub Actions) with automated testing and security scanning.</li>
+          <li>Implemented DR and backup strategies using AWS Backup and Veeam for production resilience.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Associate System Administrator</div>
+            <div class="exp-company">MicroMac Techno Valley Ltd. — Banking Software Provider</div>
+          </div>
+          <span class="exp-period">Aug 2021 – Jun 2024</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed 100+ Linux/Windows servers across 25+ banking projects with full on-premises and cloud ownership.</li>
+          <li>Deployed 20+ containerized applications (PHP, Java, .NET) using Docker with three-tier architecture.</li>
+          <li>Configured monitoring with Zabbix/Nagios and performance tuning for production apps and databases.</li>
+          <li>Enforced endpoint security, access control, and secure configuration standards across all systems.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">IT Executive (Systems & Network)</div>
+            <div class="exp-company">Aamra Networks Limited — ISP & IIG Service Provider</div>
+          </div>
+          <span class="exp-period">Mar 2019 – Jul 2021</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Provided 24/7 L1/L2 support for network and server infrastructure.</li>
+          <li>Troubleshot MikroTik routing, firewall, load balancers, and connectivity issues.</li>
+          <li>Monitored network traffic and server health using Nagios and Cacti.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Technical skills</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-cat">Cloud Platform</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS EC2</span>
+          <span class="skill-tag">S3</span>
+          <span class="skill-tag">VPC</span>
+          <span class="skill-tag">IAM</span>
+          <span class="skill-tag">KMS</span>
+          <span class="skill-tag">RDS</span>
+          <span class="skill-tag">EKS</span>
+          <span class="skill-tag">ECS</span>
+          <span class="skill-tag">ECR</span>
+          <span class="skill-tag">ALB</span>
+          <span class="skill-tag">Route53</span>
+          <span class="skill-tag">CloudWatch</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Containers & Orchestration</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Docker Compose</span>
+          <span class="skill-tag">EKS</span>
+          <span class="skill-tag">ECS</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Infrastructure as Code</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">Ansible</span>
+          <span class="skill-tag">Bash scripting</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">CI/CD</div>
+        <div class="skill-tags">
+          <span class="skill-tag">GitLab CI</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Pipeline design</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Linux Administration</div>
+        <div class="skill-tags">
+          <span class="skill-tag">RHEL</span>
+          <span class="skill-tag">Ubuntu</span>
+          <span class="skill-tag">CentOS</span>
+          <span class="skill-tag">LVM</span>
+          <span class="skill-tag">SSH hardening</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Monitoring & Observability</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Prometheus</span>
+          <span class="skill-tag">Grafana</span>
+          <span class="skill-tag">CloudWatch</span>
+          <span class="skill-tag">ELK Stack</span>
+          <span class="skill-tag">Zabbix</span>
+          <span class="skill-tag">Nagios</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Virtualization</div>
+        <div class="skill-tags">
+          <span class="skill-tag">VMware ESXi</span>
+          <span class="skill-tag">vSphere</span>
+          <span class="skill-tag">KVM</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Oracle</span>
+          <span class="skill-tag">MariaDB</span>
+          <span class="skill-tag">Replication</span>
+          <span class="skill-tag">Performance tuning</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Server hardening</span>
+          <span class="skill-tag">SSL/TLS</span>
+          <span class="skill-tag">WAF</span>
+          <span class="skill-tag">Firewall</span>
+          <span class="skill-tag">KMS</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Web & Networking</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Nginx</span>
+          <span class="skill-tag">HAProxy</span>
+          <span class="skill-tag">DNS</span>
+          <span class="skill-tag">Load Balancing</span>
+          <span class="skill-tag">VPN</span>
+          <span class="skill-tag">TCP/IP</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-cat">Backup & DR</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Veeam</span>
+          <span class="skill-tag">AWS Backup</span>
+          <span class="skill-tag">SAN/NAS</span>
+          <span class="skill-tag">Disaster Recovery</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Certifications</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(239,68,68,0.12);">🎓</div>
+        <div class="cert-name">RHCSA</div>
+        <div style="font-size: 12px; color: var(--subtle); margin: 4px 0 6px;">Red Hat Certified System Administrator</div>
+        <div class="cert-year">UIU CENTeR · 2025</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(245,158,11,0.12);">☁️</div>
+        <div class="cert-name">AWS SAA-C03</div>
+        <div style="font-size: 12px; color: var(--subtle); margin: 4px 0 6px;">AWS Solutions Architect Associate</div>
+        <div class="cert-year">CSL Training · 2025</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(99,179,237,0.12);">🖥️</div>
+        <div class="cert-name">VMware vSphere ICM</div>
+        <div style="font-size: 12px; color: var(--subtle); margin: 4px 0 6px;">vSphere 8.0 Install, Configure, Manage</div>
+        <div class="cert-year">CSL Training · 2024</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(104,211,145,0.12);">🌐</div>
+        <div class="cert-name">CCNA</div>
+        <div style="font-size: 12px; color: var(--subtle); margin: 4px 0 6px;">Cisco Certified Network Associate</div>
+        <div class="cert-year">KUET · 2019</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 12px;">
+      <div style="font-size: 20px;">🎓</div>
+      <div>
+        <div style="font-size: 14px; font-weight: 500;">B.Sc. in Computer Science & Engineering</div>
+        <div style="font-size: 13px; color: var(--muted);">North Western University, Khulna &nbsp;·&nbsp; 2015 – 2019</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Get in touch</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <p style="color: var(--subtle); margin-bottom: 2rem; max-width: 500px;">
+      Open to Senior DevOps / Linux System Engineer opportunities. Let's connect.
+    </p>
+
+    <div class="contact-grid">
+      <a href="mailto:md.naimkhan38@gmail.com" class="contact-link">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-info">
+          <div class="cl-label">Email</div>
+          <div class="cl-val">md.naimkhan38@gmail.com</div>
+        </div>
+      </a>
+
+      <a href="https://linkedin.com/in/naimcse/" target="_blank" class="contact-link">
+        <div class="contact-icon">💼</div>
+        <div class="contact-info">
+          <div class="cl-label">LinkedIn</div>
+          <div class="cl-val">linkedin.com/in/naimcse</div>
+        </div>
+      </a>
+
+      <a href="https://github.com/NaimKhan" target="_blank" class="contact-link">
+        <div class="contact-icon">🐙</div>
+        <div class="contact-info">
+          <div class="cl-label">GitHub</div>
+          <div class="cl-val">github.com/NaimKhan</div>
+        </div>
+      </a>
+
+      <a href="https://medium.com/@Naim.Khan" target="_blank" class="contact-link">
+        <div class="contact-icon">✍️</div>
+        <div class="contact-info">
+          <div class="cl-label">Medium</div>
+          <div class="cl-val">medium.com/@Naim.Khan</div>
+        </div>
+      </a>
+
+      <a href="https://credly.com/users/naimkhan" target="_blank" class="contact-link">
+        <div class="contact-icon">🏅</div>
+        <div class="contact-info">
+          <div class="cl-label">Credly</div>
+          <div class="cl-val">credly.com/users/naimkhan</div>
+        </div>
+      </a>
+
+      <a href="tel:+8801952135965" class="contact-link">
+        <div class="contact-icon">📱</div>
+        <div class="contact-info">
+          <div class="cl-label">Phone</div>
+          <div class="cl-val">+880 1952 135965</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with ♥ · MD Naim Khan · Dhaka, Bangladesh</p>
+  <p style="margin-top: 6px; font-size: 11px;">naim@devops:~$ echo "open to work" → <span style="color: var(--green);">true</span></p>
+</footer>
+
+</body>
+</html>

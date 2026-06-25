@@ -76,25 +76,85 @@
   /* HERO */
   .hero {
     min-height: 100vh;
-    display: flex; align-items: center;
+    display: flex; align-items: center; justify-content: center;
     padding: 80px 2rem 4rem;
     position: relative;
     overflow: hidden;
+    text-align: center;
   }
 
   .hero::before {
     content: '';
-    position: absolute; top: -200px; right: -200px;
+    position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
     width: 700px; height: 700px;
     background: radial-gradient(circle, rgba(66,153,225,0.07) 0%, transparent 70%);
     pointer-events: none;
   }
 
   .hero-inner {
-    max-width: 900px;
+    max-width: 720px;
     margin: 0 auto;
     width: 100%;
+    display: flex; flex-direction: column; align-items: center;
   }
+
+  /* CV DOWNLOAD SECTION */
+  .cv-section {
+    background: linear-gradient(135deg, rgba(66,153,225,0.08) 0%, rgba(99,179,237,0.04) 100%);
+    border: 1px solid rgba(99,179,237,0.3);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cv-left { flex: 1; min-width: 220px; }
+
+  .cv-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(99,179,237,0.12);
+    border: 1px solid rgba(99,179,237,0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--accent);
+    font-family: var(--mono);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .cv-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-sub {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .btn-cv {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px;
+    background: var(--accent2);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 0 0 0 rgba(99,179,237,0.3);
+  }
+
+  .btn-cv:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(99,179,237,0.25);
+  }
+
+  .btn-cv svg { flex-shrink: 0; }
 
   .hero-eyebrow {
     font-family: var(--mono);
@@ -141,6 +201,7 @@
     color: var(--subtle);
     max-width: 580px;
     margin-bottom: 2.5rem;
+    text-align: left;
     line-height: 1.8;
   }
 
@@ -589,6 +650,26 @@
         <div style="color: #718096;">}</div>
         <div style="margin-top: 8px;"><span class="t-prompt">naim@devops</span><span class="t-comment">:</span><span class="t-value">~</span><span class="t-comment">$</span> <span class="cursor">▌</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV DOWNLOAD -->
+<section id="cv" style="padding-top: 0; padding-bottom: 3rem;">
+  <div class="container">
+    <div class="cv-section">
+      <div class="cv-left">
+        <div class="cv-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          Resume · PDF
+        </div>
+        <div class="cv-title">Download my full CV</div>
+        <div class="cv-sub">Updated · DevOps Engineer · 7+ years experience</div>
+      </div>
+      <a href="https://raw.githubusercontent.com/NaimKhan/portfolio/main/DevOps%20Engineer-Naim%20Khan.pdf" target="_blank" download class="btn-cv">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
     </div>
   </div>
 </section>
